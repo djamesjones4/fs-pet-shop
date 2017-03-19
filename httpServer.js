@@ -5,16 +5,14 @@ const path = require('path')
 let args = process.argv;
 const port = process.env.PORT || 8000
 const server = http.createServer((req, res) => {
-    let pathname = url.parse(req.url).pathname
-    let pathArray = pathname.split('/')
 
+    let pathname = req.url
+    let pathArray = pathname.split('/')
+console.log('req.url', req.url);
 
     console.log('path array', pathArray);
     console.log('index', typeof pathArray[2]);
     // pathname = pathname.replace(/^\//, '') // ^ tells to do only first \
-
-    // console.log("looking for ", pathname);
-    // res.setHeader('Content-Type', 'text/plain')
     if (pathArray[1] === 'pets' && pathArray[2] === undefined) {
         fs.readFile('pets.json', 'utf8', (err, data) => {
             if (err) throw err
